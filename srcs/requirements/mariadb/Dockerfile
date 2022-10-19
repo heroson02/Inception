@@ -9,5 +9,5 @@ COPY tools/data.sql /data.sql
 RUN service mysql start && mysql < data.sql
 RUN rm -rf data.sql
 RUN cd /run && mkdir php && chown mysql php && chgrp mysql php
-RUN cd /var/run && mkdir mysqld && chown mysql mysqld && chgrp mysql mysqld
+# RUN cd /var/run && mkdir mysqld && chown mysql mysqld && chgrp mysql mysqld
 CMD /usr/bin/mysqld_safe
