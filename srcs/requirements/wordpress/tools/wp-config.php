@@ -1,12 +1,19 @@
 <?php
 
-define( 'DB_NAME', getenv('DATABASE') );
+define( 'DB_NAME', 'Data' );
 
 /** Database username */
-define( 'DB_USER', getenv('NAME') );
+define( 'DB_USER', 'yson' );
 
 /** Database password */
-define( 'DB_PASSWORD', getenv('PWD') );
+define( 'DB_PASSWORD', 'password' );
+// define( 'DB_NAME', getenv("DATABASE") );
+
+// /** Database username */
+// define( 'DB_USER', getenv("NAME") );
+
+// /** Database password */
+// define( 'DB_PASSWORD', getenv("PWD") );
 
 /** Database hostname */
 define( 'DB_HOST', 'mariadb' );
