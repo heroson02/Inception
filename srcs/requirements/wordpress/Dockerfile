@@ -7,7 +7,7 @@ RUN wget https://wordpress.org/latest.tar.gz && \
     tar -xvf latest.tar.gz && \
     mkdir /var/www && \
     mv /wordpress/ /var/www/wordpress && \
-    chown -R yson:yson /var/www/wordpress && \
+    chown -R www-data:www-data /var/www/wordpress && \
 	chmod 777 /var/www/wordpress && \
     rm -r latest.tar.gz
 RUN rm /var/www/wordpress/wp-config-sample.php
