@@ -34,5 +34,4 @@ RUN rm -f /var/www/wordpress-6.0.2.tar.gz
 RUN rm -f /var/www/wordpress/wp-config-sample.php
 COPY ./tools/wp-config.php ./var/www/wordpress/
 
-RUN mkdir ./run/php/
 CMD ./usr/sbin/php-fpm7.3 -F
