@@ -1,37 +1,24 @@
 # FROM debian:buster
 
-# RUN apt-get update -y && apt-get upgrade -y 
-# RUN apt-get -y install mariadb-client php7.3 php-mysql \
-#                     php-fpm vim wget curl php-xml php-cli php-mbstring
-# RUN wget https://wordpress.org/latest.tar.gz && \
-#     tar -xvf latest.tar.gz && \
-#     mkdir /var/www && \
-#     mv /wordpress/ /var/www/wordpress && \
-#     chown -R www-data:www-data /var/www/wordpress && \
-# 	chmod 777 /var/www/wordpress && \
-#     rm -r latest.tar.gz
-# RUN rm /var/www/wordpress/wp-config-sample.php
-# COPY /tools/wp-config.php /var/www/wordpress/wp-config.php
+# RUN apt-get update
 
-# RUN rm /etc/php/7.3/fpm/pool.d/www.conf
-# COPY /conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
+# RUN apt-get -y install php7.3 php-mysqli php-fpm mariadb-client
 
-# RUN mkdir /run/php
+# COPY ./tools/wp-config.php ./var/www/wordpress/
 
-# CMD ./usr/sbin/php-fpm7.3 --nodaemonize
+# CMD ./usr/sbin/php-fpm7.3 -F
 
 FROM debian:buster
 
-RUN apt-get update
+RUN apt-get update && apt-get -y install php7.3 php-mysqli php-fpm mariadb-client curl
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+			chmod 755 wp-cli.phar && \
+			mv wp-cli.phar /usr/local/bin/wp && \
+			mkdir -p /var/www/wordpress && chmod -R 755 /var/www/wordpress
 
-RUN apt-get -y install php7.3 php-mysqli php-fpm mariadb-client
-COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d
-
-ADD https://wordpress.org/wordpress-6.0.2.tar.gz /var/www/wordpress-6.0.2.tar.gz
-# RUN mkdir /var/www 
-RUN cd /var/www && tar -xzvf wordpress-6.0.2.tar.gz
-RUN rm -f /var/www/wordpress-6.0.2.tar.gz
-RUN rm -f /var/www/wordpress/wp-config-sample.php
-COPY ./tools/wp-config.php ./var/www/wordpress/
+RUN wp --allow-root --path='/var/www/wordpress' core download
+COPY tools/wp-config.php /var/www/wordpress/
 
 CMD ./usr/sbin/php-fpm7.3 -F
+# RUN wp --allow-root config create --dbname=$DATABASE --dbuser=$NAME --dbpass=password --dbhost=$DB_HOST --path='/var/www/wordpress'
+# RUN wp --allow-root config create --dbname=Data --dbuser=yson --dbpass=password --dbhost=mariadb --path='/var/www/wordpress'

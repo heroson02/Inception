@@ -4,7 +4,8 @@ all :
 	mkdir ../data/wordpress
 	docker-compose -f ./srcs/docker-compose.yml up
 clean :
-	sudo rm -rf ../data
+	# sudo rm -rf ../data
+	rm -rf ../data
 	docker-compose -f ./srcs/docker-compose.yml down
 	
 re : clean all
