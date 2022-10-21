@@ -16,8 +16,11 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 			mv wp-cli.phar /usr/local/bin/wp && \
 			mkdir -p /var/www/wordpress && chmod -R 755 /var/www/wordpress
 
+COPY ./tools/www.conf /etc/php/7.3/fpm/pool.d/
 RUN wp --allow-root --path='/var/www/wordpress' core download
 COPY tools/wp-config.php /var/www/wordpress/
+
+RUN mkdir -p /run/php
 
 CMD ./usr/sbin/php-fpm7.3 -F
 # RUN wp --allow-root config create --dbname=$DATABASE --dbuser=$NAME --dbpass=password --dbhost=$DB_HOST --path='/var/www/wordpress'
