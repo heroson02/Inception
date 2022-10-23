@@ -1,5 +1,5 @@
 CREATE DATABASE Data;
 CREATE USER 'yson'@'%' IDENTIFIED BY 'password';
 GRANT ALL ON Data.* TO 'yson'@'%';
-ALTER USER 'root'@'localhost' IDENTIFIED BY '0000';
 FLUSH PRIVILEGES;
+ALTER USER 'root'@'localhost' IDENTIFIED BY '0000';

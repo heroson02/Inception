@@ -2,7 +2,7 @@ all :
 	mkdir ../data
 	mkdir ../data/mariadb
 	mkdir ../data/wordpress
-	docker-compose -f ./srcs/docker-compose.yml up
+	docker-compose -f ./srcs/docker-compose.yml up --build -d
 clean :
 	# sudo rm -rf ../data
 	rm -rf ../data
