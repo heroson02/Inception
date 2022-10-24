@@ -14,10 +14,10 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 			chmod -R +x /var/www/wordpress
 
 COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/
-COPY ./tools/init.sh /
+COPY ./tools/init_wordpress.sh /
 
 RUN mkdir -p /run/php
 
 EXPOSE 9000
 
-ENTRYPOINT ["sh", "init.sh"]
+ENTRYPOINT ["sh", "init_wordpress.sh"]
