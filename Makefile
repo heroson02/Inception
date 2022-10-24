@@ -15,7 +15,7 @@ down :
 clean : down
 	sudo rm -rf $(DB_PATH)/data
 
-fclean :
+fclean : clean
 	sudo bash remove.sh
 	
 re : fclean all
