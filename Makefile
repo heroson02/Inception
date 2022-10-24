@@ -1,20 +1,23 @@
 NAME=Inception
+DB_PATH=/home/yson/data
 
 all : $(NAME)
 	
 $(NAME) :
-	mkdir ../data
-	mkdir ../data/mariadb
-	mkdir ../data/wordpress
-	docker-compose -f ./srcs/docker-compose.yml up --build -d
+	mkdir -p $(DB_PATH)
+	mkdir -p $(DB_PATH)/mariadb
+	mkdir -p $(DB_PATH)/wordpress
+	docker-compose -f ./srcs/docker-compose.yml up --build
 
-clean :
-	sudo rm -rf ../data
+down : 
 	docker-compose -f ./srcs/docker-compose.yml down
+
+clean : down
+	sudo rm -rf $(DB_PATH)/data
 
 fclean :
 	sudo bash remove.sh
 	
 re : fclean all
 
-.PHONY	: all clean fclean re
+.PHONY	: all clean fclean re down
