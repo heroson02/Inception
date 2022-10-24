@@ -13,7 +13,7 @@ down :
 	docker-compose -f ./srcs/docker-compose.yml down
 
 clean : down
-	sudo rm -rf $(DB_PATH)/data
+	sudo rm -rf $(DB_PATH)
 
 fclean : clean
 	sudo bash remove.sh
