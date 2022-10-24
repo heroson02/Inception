@@ -9,6 +9,4 @@ if [ ! -f "/var/www/wordpress/wp-config.php" ]; then
 	wp plugin update --all --allow-root
 fi
 
-#./tools/wp-config.php /var/www/wordpress/
-
 exec ./usr/sbin/php-fpm7.3 -F
