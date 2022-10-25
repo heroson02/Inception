@@ -7,10 +7,13 @@ $(NAME) :
 	mkdir -p $(DB_PATH)
 	mkdir -p $(DB_PATH)/mariadb
 	mkdir -p $(DB_PATH)/wordpress
-	docker-compose -f ./srcs/docker-compose.yml up --build
+	make up
 
 init :
 	sudo echo "127.0.0.1	yson.42.fr" >> /etc/hosts
+
+up : 
+	docker-compose -f ./srcs/docker-compose.yml up --build
 
 down : 
 	docker-compose -f ./srcs/docker-compose.yml down
