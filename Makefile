@@ -9,6 +9,9 @@ $(NAME) :
 	mkdir -p $(DB_PATH)/wordpress
 	docker-compose -f ./srcs/docker-compose.yml up --build
 
+init :
+	sudo echo "127.0.0.1	yson.42.fr" >> /etc/hosts
+
 down : 
 	docker-compose -f ./srcs/docker-compose.yml down
 
@@ -20,4 +23,4 @@ fclean : clean
 	
 re : fclean all
 
-.PHONY	: all clean fclean re down
+.PHONY	: init all clean fclean re down
